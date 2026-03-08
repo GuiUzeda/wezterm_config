@@ -391,15 +391,20 @@ resurrect.state_manager.periodic_save({
 
 wezterm.on("gui-startup", function(win, pane)
 	local state = resurrect.state_manager.load_state("default", "workspace")
-	local opts = {
-		relative = true,
-		restore_text = true,
-		on_pane_restore = resurrect.tab_state.default_on_pane_restore,
-		resize_window = false,
-		close_open_tabs = true,
-		spawn_in_workspace = "default",
-	}
-	resurrect.workspace_state.restore_workspace(state, opts)
-	show_notification("default workspace loaded!")
+	if state then
+		local opts = {
+			relative = true,
+			restore_text = true,
+			on_pane_restore = resurrect.tab_state.default_on_pane_restore,
+			resize_window = false,
+			close_open_tabs = true,
+			spawn_in_workspace = "default",
+		}
+		resurrect.workspace_state.restore_workspace(state, opts)
+		show_notification("default workspace loaded!")
+	else
+		wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), "default")
+		show_notification("default workspace created!")
+	end
 end)
 return config

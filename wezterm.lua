@@ -390,8 +390,10 @@ resurrect.state_manager.periodic_save({
 })
 
 wezterm.on("gui-startup", function(win, pane)
-	local state = resurrect.state_manager.load_state("default", "workspace")
-	if state then
+	local success, state = pcall(function()
+		return resurrect.state_manager.load_state("default", "workspace")
+	end)
+	if success and state then
 		local opts = {
 			relative = true,
 			restore_text = true,

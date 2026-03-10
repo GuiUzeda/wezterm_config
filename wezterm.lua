@@ -19,7 +19,7 @@ config.line_height = 1.15
 config.window_background_opacity = 0.95
 config.window_decorations = "RESIZE"
 config.window_padding = { left = 10, right = 10, top = 10, bottom = 10 }
-config.hide_tab_bar_if_only_one_tab = true
+config.hide_tab_bar_if_only_one_tab = false
 config.use_fancy_tab_bar = false
 config.colors = {
 	split = "#444444",

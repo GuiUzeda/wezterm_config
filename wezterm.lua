@@ -32,8 +32,10 @@ config.inactive_pane_hsb = {
 -- 🧠 HELPER FUNCTIONS
 -- =========================================================
 local function is_vim(pane)
-	local success, process_name = pcall(function()
-		local process_info = pane:get_foreground_process_info()
+        if pane:get_user_vars().IS_NVIM == 'true' then
+                return true
+        end
+        local success, process_name = pcall(function()		local process_info = pane:get_foreground_process_info()
 		return process_info and process_info.name
 	end)
 	if not success or not process_name then
